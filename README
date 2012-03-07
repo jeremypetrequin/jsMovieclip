@@ -1,0 +1,23 @@
+JS movieclip is a JQuery plugin to create, integrate, and control animations quickly and easily in an HTML page.
+It is compatible with all browsers, from Internet Explorer 6, as well as smartphone (iOS. ..). This is an efficient alternative for Flash, in some animations.
+
+JS MovieClip operates from "sprite", ie a large image containing all the frames of its animation. It will then allow to read and control the animation with stop, play, gotoAndPlay ... would like any flasher.
+
+V0 stable
+
+Instance : 
+$('#element').movieclip(); 
+
+Some options: 
+
+$('#element').movieclip({
+  'width' : 100, //number, width of a frame, in px
+  'framerate' : 25, //number, framerate (fps), default = 25 fps
+  'frames' : 10, //int, number of frame in animation
+  'url' : 'img/sprite.png', //string, url of sprite
+  'debug' : false, //boolean, display debug or not
+  'callBack' : null //callback function for 'stop()',
+});
+
+
+

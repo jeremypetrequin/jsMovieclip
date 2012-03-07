@@ -1,0 +1,65 @@
+
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta content="JS Movieclip, squirel" name="description" />
+		<title>JS Movieclip, squirel</title>
+		
+		
+
+	</head>
+
+	<body style="overflow: hidden">
+           
+            <div id="squirel" style=" position: absolute; width: 333px; height: 225px; bottom: -85px;"></div>
+                
+            <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+            <script src="../../jsMovieclip.0.js"></script>
+            <script>
+                    var time = 0, 
+                    timeNext = 0, 
+                    eventStop = function() { //stop callback
+                        $('#squirel').stop();
+                        if(mc.currentFrame() <= 18) {
+                           mc.loop(18, 24, false);
+                           var date = new Date();
+                           time = date.getTime();
+                        }
+                    }; 
+                    
+                    $('#squirel').movieclip({
+                      'width'     : 333,
+                      'frames'    : 26,
+                      'framerate' : 26,
+                      'url'       : 'sprite.png',
+                      'callBack'  : eventStop
+                    });
+                    
+                    var mc = $('#squirel').data('Movieclip');
+                    mc.loop(1, 17, true);
+                    
+                    $('#squirel').hover(function() {
+                       mc._loop = false; 
+                    }, function() {
+                       mc.loop(1, 17, true);
+                       var le = $(window).width() + 70;
+                       anime(timeNext - time, le);
+                    });
+                    
+                    loop();
+                    
+                    function loop() {
+                        $('#squirel').css('left', -350);
+                        var le = $(window).width() + 70;
+                        anime(le*15, le);
+                    }
+                    
+                    function anime(t, left) {
+                        var date = new Date();
+                        timeNext = date.getTime() + t;
+                        $('#squirel').animate({'left' : left}, t, 'linear', loop);
+                    }
+            </script>
+	</body>
+</html>

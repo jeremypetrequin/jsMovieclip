@@ -1,0 +1,92 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta content="" name="description" />
+    <title></title>
+    <style>
+        .wrapper {
+            width:500px;
+            margin:auto;
+            overflow: hidden;
+        }
+        
+        ul li {
+            display : block;
+            float: left;
+            width: 98px;
+            height: 100px;
+            cursor: pointer;
+        }
+        
+    </style>
+
+
+</head>
+
+	<body>
+            
+            
+            <div class="wrapper">
+                <p>
+                    Pass over the octopus : 
+                </p>
+                <ul>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+                
+            </div>
+            <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+            <script src="../../jsMovieclip.0.js"></script>
+            <script>
+ 
+                    
+                    
+                    $('li').each(function(){
+                       $(this).movieclip({
+                         'width'     : 103,
+                         'frames'    : 17,
+                         'framerate' : 23,
+                         'url'       : 'poulpe.png'
+                       });
+                    });
+                    
+                    $('li').hover(function(){
+                        mc = $(this).data('Movieclip');
+                        mc.play(true);
+                    }, function(){
+                        mc = $(this).data('Movieclip');
+                        mc.stop();
+                    });
+            </script>
+	</body>
+</html>

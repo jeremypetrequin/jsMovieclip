@@ -1,0 +1,117 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta content="JS Movieclip Control the animation" name="description" />
+        <title>JS Movieclip Control the animation</title>
+        <style>
+            .wrapper {
+                width:300px;
+                margin:auto;
+                overflow: hidden;
+            }
+
+            #noe {
+                width: 160px;
+                height: 57px;
+                margin: auto;
+            }
+
+            #toggle {
+                width: 50px;
+                height: 50px;
+                text-indent: -9999px;
+                cursor: pointer;
+                margin: auto;
+            }
+            .line {
+                clear: both;
+                padding: 7px;
+            }
+
+            .label {
+                display: block;
+                width: 100px;
+                float: left;
+            }
+            input {
+                float: left;
+            }
+            #lecteur {
+                margin: 10px 0;
+            }
+        </style>
+
+    </head>
+    <body>  
+        <div class="wrapper">
+            <div id="noe"></div>
+            <div>
+                <form>
+                    <div id="lecteur">
+                        <a id="toggle">Toggle</a>
+                    </div>
+                    <div class="line"> <label class="label" for="invert">Reverse</label><input type="checkbox" name="invert" id="invert"/></div>
+                    <div class="line"><label class="label" for="boucle">Loop</label><input type="checkbox" name="boucle" checked id="boucle"/></div>
+                    <div class="line"><label for="frame" class="label" >Go to frame </label><input type="text" id="frame"/></div>
+                </form>
+            </div>
+        </div>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+        <script src="../../jsMovieclip.0.js"></script>
+        <script>
+                   
+                    var eventStop = function(){
+                        if(mc) $('#frame').val(mc.currentFrame());
+                        if(btn) btn.gotoAndStop(1);
+                    };
+                    
+                    $('#toggle').movieclip({
+                         'width'     : 50,
+                         'frames'    : 2,
+                         'url'       : 'btn.png'
+                    });
+                    
+                     $('#noe').movieclip({
+                         'width'         : 160,
+                         'frames' : 102,
+                         'framerate' : 25,
+                         'url' : 'sprite.png',
+                         'callBack' : eventStop,
+                         'debug'    : true
+                    });
+                    
+                    var btn = $('#toggle').data('Movieclip'),
+                    mc = $('#noe').data('Movieclip');
+                    
+                    
+                    mc._loop = $('#boucle')[0].checked;
+                    mc._reverse = $('#invert')[0].checked;
+                    
+                    $('#toggle').click(function() {
+                       if(mc._playing) {
+                          mc.stop(mc._loop); btn.gotoAndStop(1);
+                       } else {
+                          btn.gotoAndStop(2);
+                          if(mc.currentFrame() == 101 && !mc._reverse) {
+                            mc.gotoAndPlay(1, mc._loop);   
+                          } else if(mc.currentFrame() == 1 && mc._reverse) {
+                            mc.gotoAndPlay(101, mc._loop);   
+                          } else {
+                            mc.play(mc._loop); 
+                          }
+                       }
+                    });
+
+                    $('#invert').change(function() { mc._reverse = $(this)[0].checked; });
+
+                    $('#boucle').change(function() { mc._loop = $(this)[0].checked; });
+
+                    $('#frame').blur(function(){
+                        if(($(this).val() == 'NaN' || $(this).val() == 0) && $(this).val() != '') $(this).val(1);
+                        mc.gotoAndStop($(this).val()); 
+                    });
+            </script>
+    </body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta content="Octopus, basic sample of JS movieclip" name="description" />
+        <title>Octopus, basic sample of JS movieclip</title>
+    </head>
+        
+    <body>        
+            <p style="text-align: center">Click on the octopus</p>
+            <div id="octo" style="width:98px; height: 100px; margin:auto"></div>
+                
+            <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+            <script src="../../jsMovieclip.0.js"></script>
+            <script>
+                    var eventStop = function() {
+                        if(mc) alert('Current frame = '+mc.currentFrame());
+                    };
+
+                    $('#octo').movieclip({
+                      'width'     : 103,
+                      'frames'    : 17,
+                      'framerate' : 23,
+                      'url'       : 'poulpe.png',
+                      'callBack'  : eventStop
+                    });
+                    var mc = $('#octo').data('Movieclip');
+                    mc.play(true);
+
+                    $('#octo').click(function(){
+                        mc.toggle(true);
+                    });
+            </script>
+    </body>
+</html>

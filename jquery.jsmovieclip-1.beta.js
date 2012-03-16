@@ -4,6 +4,10 @@
  * work on all browser (from IE5.5), all smartphones & tablets devices (where jQuery works too of course)
  * @author Jeremy Petrequin
  * @website http://jsmovieclip.jeremypetrequin.fr
+ * 
+ * a lot of things are currently not working
+ * 
+ * http://jsperf.com/jquery-backgroundposition-vs-native-backgroundposition
  */
    
 ;(function($){
@@ -198,6 +202,7 @@
         
         /**
          * animate the framerate
+         * in WORK
          */
         this.animateFramerate = function(from, to, time, anim, that) {
             if(_intervalFramerateAnim) {
@@ -210,7 +215,7 @@
             time = typeof(time) == 'string' ? that.framerateAnimateSettings.defaultSpeed[time] : (time || that.framerateAnimateSettings.defaultDuration);
             
             var begin = new Date().getTime();
-            var tw = new Tween(that).linear(begin, begin+time, from, to);
+            //var tw = new Tween(that).linear(begin, begin+time, from, to);
             
             _intervalFramerateAnim = setInterval(function() {
                // console.log(_intervalFramerateAnim);

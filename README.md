@@ -1,11 +1,11 @@
 JSMovieClip
 =========
 
-JS movieclip is a JQuery plugin to create, integrate, and control animations quickly and easily in an HTML page.
+JS movieclip is a JQuery plugin to quickly and easily create, integrate, and control animations in an HTML page.
 
 It is compatible with all browsers, from Internet Explorer 6, as well as smartphone (iOS. ..). This is an efficient alternative for Flash, in some animations.
 
-JS MovieClip uses "sprite", ie a large image containing all the frames of its animation. It will then allow to read and control the animation with stop, play, gotoAndPlay ... as any flasher does.
+JS MovieClip uses "sprite", that is ti say a large image containing all the frames of its animation. Then, It will allow to play and control the animation with stop, play, gotoAndPlay ... as any flasher does.
 
 V0 stable
 ----------
@@ -25,40 +25,40 @@ Some options:
 recover the movieclip object
     var mc = $('#element').data('Movieclip'); 
 
-there are some public methos :
+there are some public methods :
 
     mc.play(loop : boolean); 
-play the animation from the frame where we are, boolean loop to specifie if we want loop or not
+play the animation from the frame where you are, boolean loop to specifie if we want to loop or not
 
     mc.stop();
 stop the animation (dispatch the stop callback)
 
     mc.gotoAndPlay(frame:int, loop:boolean); 
-play the animation from the frame "frame", boolean loop to specifie if we want loop or not
+play the animation from the frame "frame", boolean loop to specifie if we want to loop or not
 
     mc.gotoAndStop(frame:int);
 go and stop directly at a frame
     
     mc.loop(frameStart:int, frameEnd:int, loop:boolean);
-play animation between frameStart & frameEnd, boolean loop to specifie if we want loop or not
+play animation between frameStart & frameEnd, boolean loop to specifie if we want to loop or not
 
     mc.currentFrame():int
 return currently frame
 
     mc.prevFrame();
-back of a frame
+go back to a frame
 
     mc.nextFrame();
-advance of a frame
+go to the next frame
 
     mc.reverseAnimation();
 reverse all animation
 
     mc.verseAnimation();
-animations puts in the good way
+put the animation in the right way
 
     mc.toggle(loop:boolean);
-if play : stop, if stop : play, boolean loop to specifie if we want loop or not
+if play : stop, if stop : play, boolean loop to specifie if we want to loop or not
 
 
 

@@ -1,32 +1,32 @@
 /**
- * @author Badger
- * create movieclip in Javascript as Flash
- * with frame by frame animation
- * & control animation with play(), stop(), gotoAndPlay(), gotoAndStop()
- * http://jsmovieclip.jeremypetrequin.fr
+* @author Badger
+* create movieclip in Javascript as Flash
+* with frame by frame animation
+* & control animation with play(), stop(), gotoAndPlay(), gotoAndStop()
+* http://jsmovieclip.jeremypetrequin.fr
 */
 
 var Movieclip = {
       
    _settings : {
-      'width'     : 100,
+      'width' : 100,
       'framerate' : 25,
-      'frames'    : 10,
-      'url'       : 'img/sprite.png',
-      'debug'     : false,
-      'callBack'  : null
+      'frames' : 10,
+      'url' : 'img/sprite.png',
+      'debug' : false,
+      'callBack' : null
    },
   
    _elmt : null,
    _interval : null,
    _cpt : 0,
-   _playing : false, 
-   _loop : false, 
+   _playing : false,
+   _loop : false,
    _firstFrame : 0,
    _lastFrame : 1,
    _reverse : false,
    _timer : null,
-    init : function(options, elmt ) { 
+    init : function(options, elmt ) {
         this._settings = $.extend({},this._settings,options);
         
         this._elmt = elmt;
@@ -51,7 +51,7 @@ var Movieclip = {
     currentFrame : function () {
         return this._cpt +1;
     },
-    play : function(loop) {  //loop = boolean play loop or a single
+    play : function(loop) { //loop = boolean play loop or a single
         this._firstFrame = 0;
         this._lastFrame = this._settings.frames -1;
         this._playing = true;
@@ -59,20 +59,20 @@ var Movieclip = {
         var _that = this;
         var f = 1000/this._settings.framerate;
         if(this._timer) {
-            clearTimeout(this._timer); 
+            clearTimeout(this._timer);
             this._timer = null;
         }
         this._timer = setInterval(function() { _that._delay(_that); }, f);
         
-        this._delay(this);  
+        this._delay(this);
     },
     prevFrame : function () {
       this._playing = false;
-      (this._cpt > 0 ? this.gotoAndStop(this._cpt-1) : '');  
+      (this._cpt > 0 ? this.gotoAndStop(this._cpt-1) : '');
     },
     nextFrame : function () {
        this._playing = false;
-       (this._cpt < this._settings.frames-1 ? this.gotoAndStop(this._cpt+1) : '');  
+       (this._cpt < this._settings.frames-1 ? this.gotoAndStop(this._cpt+1) : '');
     },
     _delay : function (_this) {
         
@@ -86,7 +86,7 @@ var Movieclip = {
             _this._cpt = (_this._cpt == _this._firstFrame) ? _this._lastFrame : _this._cpt-1;
         }
 
-        $(_this._elmt).each(function(){  
+        $(_this._elmt).each(function(){
              $(this).css('background-position', -(_this._cpt*_this._settings.width));
              if(_this._settings.debug) $(this).children('.frame').html(_this.currentFrame());
          });
@@ -100,10 +100,10 @@ var Movieclip = {
             this._lastFrame = ((lastFrame-1) >(this._settings.frames-1)) ? this._settings.frames-1 : lastFrame-1;
         }
         
-        this._cpt = (!this._reverse) ?  this._firstFrame : this._lastFrame;
+        this._cpt = (!this._reverse) ? this._firstFrame : this._lastFrame;
         this._loop = loop;
         var _this = this;
-        $(this._elmt).each(function(){ 
+        $(this._elmt).each(function(){
             $(this).css('background-position', -(_this._cpt*_this._settings.width));
         });
         if(!this._playing) {
@@ -111,7 +111,7 @@ var Movieclip = {
             var f = 1000/this._settings.framerate;
             //setTimeout(function() {_this._delay(_this);}, f);
             if(this._timer) {
-                clearTimeout(this._timer); 
+                clearTimeout(this._timer);
                 this._timer = null;
             }
             var _that = this;
@@ -129,14 +129,14 @@ var Movieclip = {
         if(this._settings.callBack && typeof(this._settings.callBack) == 'function') this._settings.callBack();
         
     },
-    gotoAndPlay : function(frame, loop) {// frame : uint between 1 &  frametotal 
+    gotoAndPlay : function(frame, loop) {// frame : uint between 1 & frametotal
         frame = (!this._reverse) ? frame -2 : frame;
-        this._cpt = (frame > this._settings.frames)? this._settings.frames%frame : frame; 
+        this._cpt = (frame > this._settings.frames)? this._settings.frames%frame : frame;
         this.play(loop);
-    }, 
-    gotoAndStop : function(frame) { // frame : uint between 1 &  frametotal
+    },
+    gotoAndStop : function(frame) { // frame : uint between 1 & frametotal
         //this._cpt = (this._cpt == 0)? 1 : this._cpt-1;
-        this._cpt = (frame > this._settings.frames)? this._settings.frames%frame : frame-1; 
+        this._cpt = (frame > this._settings.frames)? this._settings.frames%frame : frame-1;
         $(this._elmt).css('background-position', -(this._cpt*this._settings.width));
            // var x = parseFloat($(this).css('background-position').split(' ')[0].replace('px', ''));
         this.stop();
@@ -147,7 +147,7 @@ var Movieclip = {
 // Make sure Object.create is available in the browser (for our prototypal inheritance)
 // Courtesy of Papa Crockford
 // Note this is not entirely equal to native Object.create, but compatible with our use-case
-if (typeof Object.create !== 'function') { 
+if (typeof Object.create !== 'function') {
     Object.create = function (o) {
         function F() {} // optionally move this outside the declaration and into a closure if you need more speed.
         F.prototype = o;
@@ -170,4 +170,3 @@ if (typeof Object.create !== 'function') {
     }
   };
 })(jQuery);
-

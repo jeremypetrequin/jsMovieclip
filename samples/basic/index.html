@@ -4,32 +4,62 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta content="Octopus, basic sample of JS movieclip" name="description" />
         <title>Octopus, basic sample of JS movieclip</title>
+        <style>
+            body {
+                background: black;
+                text-align: center;
+                color: white;
+                font-family: sans-serif;
+            }
+            
+            #octo {
+                cursor: pointer;
+                background: url(poulpe.png) no-repeat;   
+                margin: 20px auto;
+                width: 98px;
+                height: 100px;
+            }
+            
+            #octo_1 {       
+                cursor: pointer;
+                margin: 20px auto;
+                height: 98px;
+                width: 100px;
+                background: url(poulpe_1.png) no-repeat;   
+            }
+            
+
+        </style>
     </head>
         
     <body>        
             <p style="text-align: center">Click on the octopus</p>
-            <div id="octo" style="width:98px; height: 100px; margin:auto"></div>
-                
-            <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
-            <script src="../../jsMovieclip.0.js"></script>
+            <div id="octo" ></div>
+            <div id="octo_1" ></div>
+            <script src="../../jsmovieclip-1.js"></script>
             <script>
-                    var eventStop = function() {
-                        if(mc) alert('Current frame = '+mc.currentFrame());
-                    };
-
-                    $('#octo').movieclip({
-                      'width'     : 103,
-                      'frames'    : 17,
-                      'framerate' : 23,
-                      'url'       : 'poulpe.png',
-                      'callBack'  : eventStop
-                    });
-                    var mc = $('#octo').data('Movieclip');
-                    mc.play(true);
-
-                    $('#octo').click(function(){
-                        mc.toggle(true);
-                    });
+                    var octo = document.getElementById('octo'),
+                    movieclip = new JSMovieclip(octo, {
+                        width : 103, 
+                        direction : 'h', 
+                        frames_number : 17, 
+                        framerate : 24
+                    }).play();
+                    
+                    var octo1 = document.getElementById('octo_1'),
+                    movieclip1 = new JSMovieclip(octo1, {
+                        height : 103, 
+                        direction : 'v', 
+                        frames_number : 17, 
+                        framerate : 24
+                    }).play(true);
+                    
+                    octo1.onclick = function() {
+                        movieclip1.toggle(true);
+                    }
+                    octo.onclick = function() {
+                        movieclip.toggle(true);
+                    }
             </script>
     </body>
 </html>

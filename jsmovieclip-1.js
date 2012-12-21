@@ -1,17 +1,16 @@
 /**
- * Jsmovieclip,
+ * JSMovieclip,
  * create, animate, & control sprite sheet animation as AS3 movieclip
  * work on all browser (from IE5.5), all smartphones & tablets devices
  * @author Jeremy Petrequin
- * @website http://jsmovieclip.jeremypetrequin.fr
+ * @website https://github.com/jeremypetrequin/jsMovieclip
  * 
- * a lot of things are currently not working
+ * Why no jQuery ? 
+ *  > for perf http://jsperf.com/jquery-backgroundposition-vs-native-backgroundposition for example
  * 
- * http://jsperf.com/jquery-backgroundposition-vs-native-backgroundposition
  */
    
 (function() {
-    
     "use strict";
     function JSMovieclip(elmts, params) {
         var t = this;
@@ -32,7 +31,7 @@
         t._way = 1;
         t._framesNumber = params.frames_number || 0;
         
-        t.updateFrames(params.frame, params.direction, params.width, params.height, params.frames_number);
+        t.updateFrames(params.frames, params.direction, params.width, params.height, params.frames_number);
     }
     
     
@@ -81,7 +80,7 @@
             var frames = this.frames,
             i = frames.length;
             this.frames = [];
-            while(i--) this.frames[i] = '-'+frames[i].x+' -'+frames[i].y;
+            while(i--) this.frames[i] = '-'+frames[i].x+'px -'+frames[i].y+'px';
         },
         //public method
         
@@ -109,8 +108,8 @@
             var i = 0;
             for(;i<nbframe;i++) {
                 this.frames.push({
-                    x : (direction == 'h' ? i * width : 0) + 'px',
-                    y : (direction == 'v' ? i * height : 0) + 'px'
+                    x : (direction == 'h' ? i * width : 0),
+                    y : (direction == 'v' ? i * height : 0)
                 });
             }
             i=null;
@@ -171,7 +170,7 @@
         },
         stop : function() {
             this.playing = false;
-            if(this._timer) {clearTimeout(this._timer);this._timer = null;}
+            this._timer && (clearTimeout(this._timer), this._timer = null);
             this.stopCallback && this.stopCallback();
             return this;
         },
@@ -189,20 +188,7 @@
         }
     };
 
-    
     window.JSMovieclip = JSMovieclip;
-    
-    /**************************************
-     *             plugin instanciation                 *
-     **************************************/ 
-    /*$.fn.movieclip = function(options) {
-        if ( this.length ) {
-          var mc = new MovieClip(this, options);
-          $.data(this, 'Movieclip', mc);  
-          return mc;
-        }
-    };*/
-    
 })();
 
 

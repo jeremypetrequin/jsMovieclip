@@ -14,6 +14,7 @@
             #noe {
                 width: 160px;
                 height: 57px;
+                background: url(sprite.png) no-repeat;
                 margin: auto;
             }
 
@@ -59,29 +60,53 @@
         </div>
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
-        <script src="../../jsMovieclip.0.js"></script>
+        <script src="../../jsmovieclip-1.js"></script>
         <script>
                    
                     var eventStop = function(){
-                        if(mc) $('#frame').val(mc.currentFrame());
-                        if(btn) btn.gotoAndStop(1);
+                        if(mc) document.getElementById('frame').value = mc.currentFrame();
+                        //if(btn) btn.gotoAndStop(1);
                     };
                     
-                    $('#toggle').movieclip({
+                   /* $('#toggle').movieclip({
                          'width'     : 50,
                          'frames'    : 2,
                          'url'       : 'btn.png'
-                    });
+                    });*/
                     
-                     $('#noe').movieclip({
-                         'width'         : 160,
-                         'frames' : 102,
-                         'framerate' : 25,
-                         'url' : 'sprite.png',
-                         'callBack' : eventStop,
-                         'debug'    : true
-                    });
-                    
+                    var mc = new JSMovieclip($('#noe')[0], {
+                        width         : 160,
+                        frames_number : 100,
+                        framerate : 25,
+                        direction : 'h',
+                        stopCallback : eventStop
+                    }).play(true);
+                   
+                   
+                    document.getElementById('boucle').onchange = function() {
+                        mc.loop = this.checked;
+                    }
+                    document.getElementById('toggle').onclick = function() {
+                        mc.toggle(mc.loop);
+                        return;
+                         if(mc.playing) {
+                            mc.stop(); 
+                            //btn.gotoAndStop(1);
+                        } else {
+                            mc.play(mc.loop); 
+                            return;
+                            //btn.gotoAndStop(2);
+                            if(mc.currentFrame() == 101 && !mc._reverse) {
+                                mc.gotoAndPlay(1, mc._loop);   
+                            } else if(mc.currentFrame() == 1 && mc._reverse) {
+                                mc.gotoAndPlay(101, mc._loop);   
+                            } else {
+                                mc.play(mc.loop); 
+                            }
+                        }
+                    }
+                   //$('#boucle').change(function() { mc.loop = this.checked; });
+                   /*
                     var btn = $('#toggle').data('Movieclip'),
                     mc = $('#noe').data('Movieclip');
                     
@@ -112,6 +137,7 @@
                         if(($(this).val() == 'NaN' || $(this).val() == 0) && $(this).val() != '') $(this).val(1);
                         mc.gotoAndStop($(this).val()); 
                     });
+                    */
             </script>
     </body>
 </html>

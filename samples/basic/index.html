@@ -12,30 +12,41 @@
                 font-family: sans-serif;
             }
             
-            #octo {
+            .octo {
                 cursor: pointer;
-                background: url(poulpe.png) no-repeat;   
                 margin: 20px auto;
+            }
+            
+            #octo {
+                background: url(poulpe.png) no-repeat;   
                 width: 98px;
                 height: 100px;
             }
             
             #octo_1 {       
-                cursor: pointer;
-                margin: 20px auto;
                 height: 98px;
                 width: 100px;
                 background: url(poulpe_1.png) no-repeat;   
             }
+            #octo_2 {       
+                width: 98px;
+                height: 100px;
+                background: url(poulpe_2.png) no-repeat;   
+            }
             
-
+            p {text-align: center}
         </style>
     </head>
         
     <body>        
-            <p style="text-align: center">Click on the octopus</p>
-            <div id="octo" ></div>
-            <div id="octo_1" ></div>
+            <p>Click on the octopus</p>
+            <p>Hozyzontal Sprite</p>
+            <div id="octo" class="octo"></div>
+            <p>Vertical Sprite</p>
+            <div id="octo_1" class="octo" ></div>
+            <p>Custom Sprite</p>
+            <div id="octo_2" class="octo" ></div>
+            
             <script src="../../jsmovieclip-1.js"></script>
             <script>
                     var octo = document.getElementById('octo'),
@@ -44,7 +55,7 @@
                         direction : 'h', 
                         frames_number : 17, 
                         framerate : 24
-                    }).play();
+                    }).play(true);
                     
                     var octo1 = document.getElementById('octo_1'),
                     movieclip1 = new JSMovieclip(octo1, {
@@ -54,12 +65,27 @@
                         framerate : 24
                     }).play(true);
                     
-                    octo1.onclick = function() {
-                        movieclip1.toggle(true);
-                    }
+                    var octo2 = document.getElementById('octo_2'),
+                    movieclip2 = new JSMovieclip(octo2, {
+                        frames : [ //we define each frame
+                            {x : 0, y : 0}, {x : 103, y : 0}, {x : 206, y : 0}, {x : 309, y : 0}, {x : 412, y:0}, {x : 515, y:0}, 
+                            {x : 0, y : 100}, {x : 103, y : 100}, {x : 206, y : 100}, {x : 309, y : 100}, {x : 412, y:100}, {x : 515, y:100}, 
+                            {x : 0, y : 200}, {x : 103, y : 200}, {x : 206, y : 200}, {x:309, y:200}, {x : 412, y:200}
+                        ],
+                        framerate : 24
+                    }).play(true);
+                    
                     octo.onclick = function() {
                         movieclip.toggle(true);
                     }
+                    octo1.onclick = function() {
+                        movieclip1.toggle(true);
+                    }
+                    octo2.onclick = function() {
+                        movieclip2.toggle(true);
+                    }
+                    
+                     
             </script>
     </body>
 </html>

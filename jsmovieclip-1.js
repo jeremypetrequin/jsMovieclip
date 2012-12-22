@@ -14,7 +14,7 @@
     "use strict";
     function JSMovieclip(elmts, params) {
         var t = this;
-        t.elmts = toString.call(elmts) === "[object Array]"  ?  elmts : [elmts]; //isArray method, stolen from jQuery
+        t.elmts = toString.call(elmts) === "[object Array]" || toString.call(elmts) === "[object NodeList]"  ?  elmts : [elmts]; 
         t.playing = false;
         t.framerate = params.framerate || 25;
         t.frames = [];

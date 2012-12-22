@@ -14,10 +14,11 @@
     "use strict";
     function JSMovieclip(elmts, params) {
         var t = this,
-        str = toString.call(elmts);
-        t.elmts = str  === "[object Array]" 
-                    || str === "[object NodeList]"  
-                    || str === "[object Object]"  
+        str = elmts.toString();
+        t.elmts = str  === '[object Array]' 
+                    || str === '[object NodeList]'  
+                    || str === '[object HTMLCollection]'
+                    || str === '[object Object]'  
                     ?  elmts : [elmts]; 
         str = null;
         t.playing = false;

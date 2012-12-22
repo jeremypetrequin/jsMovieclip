@@ -128,8 +128,9 @@
          * @param way int : 1 normal way, -1 inverted way
          * @return current JSMovieclip object
          */
-        changeWay : function(way) {
+        changeWay : function(way, keepFrame) {
           if(way == this._way) return this;
+          !!keepFrame === true && (this._idx = this._framesNumber - this._idx);
           this._way = way;
           this._calculateFrames();
           return this;

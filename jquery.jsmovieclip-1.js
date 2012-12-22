@@ -42,6 +42,7 @@
         //"protected" method
         _render : function() {
             var i = this.elmtsLength, t = this;
+            //http://jsperf.com/jquery-backgroundposition-vs-native-backgroundposition
             while(i--) this.elmts[i].style.backgroundPosition = this._tmpFrames[this._idx];
             if(t.playing) {
                 if(t._idx >= t.lastFrame -1) {

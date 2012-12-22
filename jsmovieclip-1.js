@@ -4,10 +4,6 @@
  * work on all browser (from IE5.5), all smartphones & tablets devices
  * @author Jeremy Petrequin
  * @website https://github.com/jeremypetrequin/jsMovieclip
- * 
- * Why no jQuery ? 
- *  > for perf http://jsperf.com/jquery-backgroundposition-vs-native-backgroundposition for example
- * 
  */
    
 (function() {

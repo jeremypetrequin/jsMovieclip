@@ -22,8 +22,10 @@
                 width: 50px;
                 height: 50px;
                 text-indent: -9999px;
+                display: block;
                 cursor: pointer;
                 margin: auto;
+                background: url(btn.png) no-repeat;
             }
             .line {
                 clear: both;
@@ -48,33 +50,33 @@
         <div class="wrapper">
             <div id="noe"></div>
             <div>
-                <form>
                     <div id="lecteur">
                         <a id="toggle">Toggle</a>
                     </div>
                     <div class="line"> <label class="label" for="invert">Reverse</label><input type="checkbox" name="invert" id="invert"/></div>
                     <div class="line"><label class="label" for="boucle">Loop</label><input type="checkbox" name="boucle" checked id="boucle"/></div>
                     <div class="line"><label for="frame" class="label" >Go to frame </label><input type="text" id="frame"/></div>
-                </form>
             </div>
         </div>
-
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
         <script src="../../jsmovieclip-1.js"></script>
         <script>
                    
-                    var eventStop = function(){
-                        if(mc) document.getElementById('frame').value = mc.currentFrame();
-                        //if(btn) btn.gotoAndStop(1);
+                   var mc, btn, eventStop = null;
+                    //stop callback
+                    eventStop= function(){
+                        document.getElementById('frame').value = mc.currentFrame();
+                        btn.gotoAndStop(1);
                     };
                     
-                   /* $('#toggle').movieclip({
-                         'width'     : 50,
-                         'frames'    : 2,
-                         'url'       : 'btn.png'
-                    });*/
-                    
-                    var mc = new JSMovieclip($('#noe')[0], {
+                    //btn movieclip
+                   btn = new JSMovieclip(document.getElementById('toggle'), {
+                       width     : 50,
+                       frames_number    : 2,
+                       direction : 'h'
+                   }).gotoAndStop(2);
+                   
+                   //animation movieclip
+                   mc  = new JSMovieclip(document.getElementById('noe'), {
                         width         : 160,
                         frames_number : 100,
                         framerate : 25,
@@ -82,62 +84,20 @@
                         stopCallback : eventStop
                     }).play(true);
                    
-                   
+                   //event handler
+                   document.getElementById('invert').onchange = function() {
+                       mc.changeWay(this.checked ? -1 : 1, true);
+                   }
                     document.getElementById('boucle').onchange = function() {
                         mc.loop = this.checked;
                     }
+                    document.getElementById('frame').onblur = function() {
+                        mc.gotoAndStop(this.value || 0);
+                    }
                     document.getElementById('toggle').onclick = function() {
                         mc.toggle(mc.loop);
-                        return;
-                         if(mc.playing) {
-                            mc.stop(); 
-                            //btn.gotoAndStop(1);
-                        } else {
-                            mc.play(mc.loop); 
-                            return;
-                            //btn.gotoAndStop(2);
-                            if(mc.currentFrame() == 101 && !mc._reverse) {
-                                mc.gotoAndPlay(1, mc._loop);   
-                            } else if(mc.currentFrame() == 1 && mc._reverse) {
-                                mc.gotoAndPlay(101, mc._loop);   
-                            } else {
-                                mc.play(mc.loop); 
-                            }
-                        }
+                        mc.playing && btn.gotoAndStop(2);
                     }
-                   //$('#boucle').change(function() { mc.loop = this.checked; });
-                   /*
-                    var btn = $('#toggle').data('Movieclip'),
-                    mc = $('#noe').data('Movieclip');
-                    
-                    
-                    mc._loop = $('#boucle')[0].checked;
-                    mc._reverse = $('#invert')[0].checked;
-                    
-                    $('#toggle').click(function() {
-                       if(mc._playing) {
-                          mc.stop(mc._loop); btn.gotoAndStop(1);
-                       } else {
-                          btn.gotoAndStop(2);
-                          if(mc.currentFrame() == 101 && !mc._reverse) {
-                            mc.gotoAndPlay(1, mc._loop);   
-                          } else if(mc.currentFrame() == 1 && mc._reverse) {
-                            mc.gotoAndPlay(101, mc._loop);   
-                          } else {
-                            mc.play(mc._loop); 
-                          }
-                       }
-                    });
-
-                    $('#invert').change(function() { mc._reverse = $(this)[0].checked; });
-
-                    $('#boucle').change(function() { mc._loop = $(this)[0].checked; });
-
-                    $('#frame').blur(function(){
-                        if(($(this).val() == 'NaN' || $(this).val() == 0) && $(this).val() != '') $(this).val(1);
-                        mc.gotoAndStop($(this).val()); 
-                    });
-                    */
             </script>
     </body>
 </html>

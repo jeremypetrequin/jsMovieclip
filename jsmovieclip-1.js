@@ -13,8 +13,13 @@
 (function() {
     "use strict";
     function JSMovieclip(elmts, params) {
-        var t = this;
-        t.elmts = toString.call(elmts) === "[object Array]" || toString.call(elmts) === "[object NodeList]"  ?  elmts : [elmts]; 
+        var t = this,
+        str = toString.call(elmts);
+        t.elmts = str  === "[object Array]" 
+                    || str === "[object NodeList]"  
+                    || str === "[object Object]"  
+                    ?  elmts : [elmts]; 
+        str = null;
         t.playing = false;
         t.framerate = params.framerate || 25;
         t.frames = [];

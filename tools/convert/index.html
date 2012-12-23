@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <style>
+            body, html {
+                width: 100%;
+                height: 100%;
+                overflow-x: hidden;
+            }
+            body>div {
+                width: 100%;
+            }
+            .col-1, .col-2 {
+                width: 46%;
+                margin: 2%;
+                height: 96%;
+                float: left;
+            }
+            #output {
+                overflow-y: scroll;
+            }
+            #source {
+                width: 98%;
+                max-width: 100%;
+                padding: 0;
+                min-height: 500px;
+                margin: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Convert Texture Packer JSON output file to JSMovieclip frames array</h1>
+        <div>
+            <form id="form" class="col-1">
+                <h3>Paste the JSON</h3>
+                <textarea id="source"></textarea>
+                <input type="submit" value="OK" />
+            </form>
+            <div class="col-2">
+                <h3>Copy the output</h3>
+                <div id="output"></div>
+            </div>
+        </div>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+        <script>
+            (function() {
+                var $source = $('#source'),
+                $output = $('#output');
+                $('#form').on('submit', function() {
+                    var source = $.parseJSON($source.val());
+                    
+                    var output = [], i = 0, L = source.frames.length;
+                    
+                    for(; i<L; i++) {
+                        output.push('{ x : '+source.frames[i].frame.x+', y : '+source.frames[i].frame.y+' }');
+                    }
+                    
+                    $output.html('['+output.join(',\n')+']');
+                    return false;
+                });
+            })();
+        </script>
+    </body>
+</html>

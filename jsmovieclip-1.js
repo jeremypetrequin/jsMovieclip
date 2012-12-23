@@ -9,6 +9,7 @@
 (function() {
     "use strict";
     function JSMovieclip(elmts, params) {
+        if(!elmts) return this;
         var t = this,
         str = elmts.toString();
         t.elmts = str  === '[object Array]' 
@@ -20,7 +21,7 @@
         t.playing = false;
         t.framerate = params.framerate || 25;
         t.frames = [];
-        t.loop = !!params.loop;
+        t.loop = false;
         t.elmtsLength = t.elmts.length;
         t.stopCallback = params.stopCallback || null;
         t.firstFrame = 1;
@@ -186,7 +187,6 @@
             this.loop = false;
             this.playing = false;
             this._enterFrame();
-            this.stopCallback && this.stopCallback();
             return this;
         }
     };

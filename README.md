@@ -11,6 +11,7 @@ V1 stable
 ----------
 
 Instance : 
+
     var movieclip = new JSMovieclip(document.getElementById('div-id'), params);
 
 You can pass some options in params: 
@@ -30,40 +31,62 @@ You can pass some options in params:
 there are some public methods :
 
 play the animation from the frame where you are, boolean loop to specifie if we want to loop or not
+
     mc.play(loop : boolean); 
 
+
 stop the animation (dispatch the stop callback)
+
     mc.stop();
 
+
 play the animation from the frame "frame", boolean loop to specifie if we want to loop or not
+
     mc.gotoAndPlay(frame:int, loop:boolean); 
 
+
 go and stop directly at a frame
+
     mc.gotoAndStop(frame:int);
 
+
 block the animation between two specifics frames :     
+
     mc.loopBetween(frameStart:int, frameEnd:int);
+
 all animation are now between frameStart and frameEnd animation between frameStart & frameEnd
+
     mc.loopBetween(1, 10).play(true); //will play animation between first frame and 10's
 
+
 return currently frame
+
     mc.currentFrame():int
 
+
 go back to a frame
+
     mc.prevFrame();
 
+
 go to the next frame
+
     mc.nextFrame();
 
+
 if play : stop, if stop : play, boolean loop to specifie if we want to loop or not
+
     mc.toggle(loop:boolean);
 
 Change the way of playing : 
+
     mc.changeWay(1); // play in the normal way
     mc.changeWay(-1); // invert the playing
     mc.changeWay(-1, true); //the second param, a boolean to stand a the same frame
 
+
 All method are chainable (except currentFrame() ), so you can do :
+
     mc.loopBetween(12, 14).gotoAndPlay(12)
 
 V1 jQuery plugin version

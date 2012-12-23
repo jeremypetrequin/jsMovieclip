@@ -82,7 +82,7 @@ Change the way of playing :
 
     mc.changeWay(1); // play in the normal way
     mc.changeWay(-1); // invert the playing
-    mc.changeWay(-1, true); //the second param, a boolean to stand a the same frame
+    mc.changeWay(-1, true); //the second param, a boolean to stay a the same frame
 
 
 All method are chainable (except currentFrame() ), so you can do :
@@ -92,12 +92,15 @@ All method are chainable (except currentFrame() ), so you can do :
 V1 jQuery plugin version
 ----------
 Instance :
+
     $('element(s)').JSMovieclip(params);
 
 recover the movieclip object
+
     var mc = $('#element').data('JSMovieclip'); 
 
 You can now apply all the public method on mc object
+
     mc.play();
     mc.stop();
     //....

@@ -9,12 +9,26 @@ JS MovieClip uses "sprite", that is it say a large image containing all the fram
 
 V1 stable
 ----------
-First, you need a DOM element, div or what you want : 
+
+First, you need a sprite, a big image containing each frame of your animation.
+For it, you have 3 options : 
+<ul>
+    <li>Horizontal sprite http://jsmovieclip.jeremypetrequin.fr/samples/basic/poulpe.png</li>
+    <li>Vertical sprite http://jsmovieclip.jeremypetrequin.fr/samples/basic/poulpe_1.png</li>
+    <li>Custom sprite http://jsmovieclip.jeremypetrequin.fr/samples/basic/poulpe_2.png</li>
+</ul>
+
+The only requirement is that each frame need to have the same size!
+
+To simply create it : in flash or After effects, export your animation in a PNG sequences, and join it in a sprite with photoshop, GIMP, TexturePacker...
+
+
+Then, you need a DOM element, div or what you want : 
 ````HTML
 <div id="my-element"></div>
 ````
 
-Then, you need to apply it the width and the height of a frame (each frame need to have the same size) and the sprite as background :
+After, you need to apply it the width and the height of a frame (each frame need to have the same size) and the sprite as background :
 ````CSS
 #my-element {
     width : 200px;
@@ -33,18 +47,26 @@ First parameter may be a DOM element, an array of DOM elements, a jQuery (or Zep
 Second parameter is options, it can be : 
 ````javascript
 {
+    framerate : 25,
+    stopCallback : fn,
     frames : [],
     direction : 'h' || 'v',
     frame_number : 0,
-    stopCallbach : fn,
-    framerate : 25,
     width : 0,
     height : 0
 }
 ````
+So : 
+<ul>
+    <li>the framerate is the framerate of your animation, in Frame Per Second, the default is 25</li>
+    <li>In stopCallback you can pass a function it'll call each time the movieclip stop</li>
+</ul>
 
 
-there are some public methods :
+
+
+
+There are some public methods :
 
 play the animation from the frame where you are, boolean loop to specifie if we want to loop or not
 ````javascript

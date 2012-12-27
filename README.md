@@ -9,34 +9,6 @@ JS MovieClip uses "sprite", that is it say a large image containing all the fram
 
 V1 stable
 ----------
-
-Instance : 
-
-    var movieclip = new JSMovieclip(document.getElementById('div-id'), params);
-
-In first param, you can passe : a dom element, an array of a dom elements, a NodeList, a jQuery object...
-
-You can pass some options in params: 
-
-    {
-        frames : [],
-        direction : 'h' || 'v',
-        frame_number : 0,
-        stopCallback : fn,
-        framerate : 25,
-        width : 0,
-        height : 0
-    }
-
-
-
-there are some public methods :
-
-play the animation from the frame where you are, boolean loop to specifie if we want to loop or not
-
-    mc.play(loop : boolean); 
-
-=======
 ###Creation###
 
 First, you need a sprite, a big image containing each frame of your animation.
@@ -98,7 +70,7 @@ For the sprite, you have several option, so,
 <li>
 For a vertical sprite, set direction to 'v', the frame_number, and the height of a frame
 </li>
-<li>If you have a custom sprite, just set the frames array with each frame : [{x:0, y:0}, {x:200, y:0}, {x:400, 0}, {x:0, y:200}, {x:200, y:200}, {x:400, 200} ,....] (you can also use this parameter for a vertical of a horizontal sprite</li>
+<li>If you have a custom sprite, just set the frames array with each frame : [{x:0, y:0}, {x:200, y:0}, {x:400, 0}, {x:0, y:200}, {x:200, y:200}, {x:400, 200} ,....] (you can also use this parameter for a vertical of a horizontal sprite)</li>
 </ul>
 
 ###API###

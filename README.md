@@ -10,6 +10,8 @@ JS MovieClip uses "sprite", that is it say a large image containing all the fram
 V1 stable
 ----------
 
+###Creation###
+
 First, you need a sprite, a big image containing each frame of your animation.
 For it, you have 3 options : 
 <ul>
@@ -20,7 +22,7 @@ For it, you have 3 options :
 
 The only requirement is that each frame need to have the same size!
 
-To simply create it : in flash or After effects, export your animation in a PNG sequences, and join it in a sprite with photoshop, GIMP, TexturePacker...
+To simply create it : in Flash or After Effects, export your animation in a PNG sequences, and join it in a sprite with photoshop, GIMP, TexturePacker...
 
 
 Then, you need a DOM element, div or what you want : 
@@ -62,13 +64,21 @@ So :
     <li>In stopCallback you can pass a function it'll call each time the movieclip stop</li>
 </ul>
 
+For the sprite, you have several option, so, 
+<ul>
+<li>if you have a horizontal sprite, you can simply specifie direction : 'h' (horinzontal), the frame_number and the width of a frame
+</li>
+<li>
+For a vertical sprite, set direction to 'v', the frame_number, and the height of a frame
+</li>
+<li>If you have a custom sprite, just set the frames array with each frame : [{x:0, y:0}, {x:200, y:0}, {x:400, 0}, {x:0, y:200}, {x:200, y:200}, {x:400, 200} ,....] (you can also use this parameter for a vertical of a horizontal sprite</li>
+</ul>
 
-
-
+###API###
 
 There are some public methods :
 
-play the animation from the frame where you are, boolean loop to specifie if we want to loop or not
+play the animation from the frame where you are, boolean loop to specifie if you want to loop or not
 ````javascript
 mc.play(loop : boolean); 
 ````
@@ -78,12 +88,12 @@ stop the animation (dispatch the stop callback)
 mc.stop();
 ````
 
-play the animation from the frame "frame", boolean loop to specifie if we want to loop or not
+play the animation from the frame "frame", boolean loop to specifie if you want to loop or not
 ````javascript
 mc.gotoAndPlay(frame:int, loop:boolean); 
 ````
 
-go and stop directly at a frame
+go and stop directly to a frame
 ````javascript
 mc.gotoAndStop(frame:int);
 ````
@@ -103,7 +113,7 @@ If you call ````mc.loopBetween();```` you can call clearLoopBetween to reset fir
 mc.clearLoopBetween();
 ````
 
-get currentl frame
+get current frame
 ````javascript
 mc.currentFrame():int
 ````

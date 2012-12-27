@@ -1,11 +1,11 @@
 JSMovieClip
 =========
 
-JS movieclip is a small javascript library to quickly and easily create, integrate, and control animations in an HTML page.
+JS movieclip is a small javascript library to quickly and easily create, integrate, and control animations in a HTML page.
 
-It is compatible with all browsers, from Internet Explorer 6, as well as smartphone (iOS. ..). 
+It is compatible with all browsers, from Internet Explorer 6, as well as smartphone (iOS, Android..). 
 
-JS MovieClip uses "sprite", that is it say a large image containing all the frames of its animation. Then, It will allow to play and control the animation with stop, play, gotoAndPlay ... as any flasher does.
+JS MovieClip uses "sprite", that is it say a large image containing all the frames of its animation. Then, It will allow to play and control the animation with ````stop()````, ````play()````, ````gotoAndPlay()```` ... like any Flashers does.
 
 V1 stable
 ----------
@@ -29,7 +29,7 @@ Then, you need a DOM element, div or what you want :
 <div id="my-element"></div>
 ````
 
-After, you need to apply it the width and the height of a frame (each frame need to have the same size) and the sprite as background :
+After, you need to apply it the width and the height of a frame and the sprite as background :
 ````CSS
 #my-element {
     width : 200px;
@@ -60,7 +60,7 @@ Second parameter is options, it can be :
 So : 
 <ul>
     <li>the framerate is the framerate of your animation, in Frame Per Second, the default is 25</li>
-    <li>In stopCallback you can pass a function it'll call each time the movieclip stop</li>
+    <li>In stopCallback you can pass a function it'll call each time the movieclip stops</li>
 </ul>
 
 For the sprite, you have several option, so, 
@@ -77,7 +77,7 @@ For a vertical sprite, set direction to 'v', the frame_number, and the height of
 
 There are some public methods :
 
-play the animation from the frame where you are, boolean loop to specifie if you want to loop or not
+play the animation from the frame where you are, boolean ````loop````` to specifie if you want to loop or not
 ````javascript
 mc.play(loop : boolean); 
 ````
@@ -87,7 +87,7 @@ stop the animation (dispatch the stop callback)
 mc.stop();
 ````
 
-play the animation from the frame "frame", boolean loop to specifie if you want to loop or not
+play the animation from the frame ````frame````, boolean ````loop```` to specifie if you want to loop or not
 ````javascript
 mc.gotoAndPlay(frame:int, loop:boolean); 
 ````

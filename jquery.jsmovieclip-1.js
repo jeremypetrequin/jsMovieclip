@@ -9,18 +9,15 @@
 (function() {
     "use strict";
     function JSMovieclip(elmts, params) {
+        if(!elmts) {return this;}
         var t = this,
         str = elmts.toString();
-        t.elmts = str  === '[object Array]' 
-                    || str === '[object NodeList]'  
-                    || str === '[object HTMLCollection]'
-                    || str === '[object Object]'  
-                    ?  elmts : [elmts]; 
+        t.elmts = str  === '[object Array]' || str === '[object NodeList]'   || str === '[object HTMLCollection]' || str === '[object Object]'  ?  elmts : [elmts]; 
         str = null;
         t.playing = false;
         t.framerate = params.framerate || 25;
         t.frames = [];
-        t.loop = !!params.loop;
+        t.loop = false;
         t.elmtsLength = t.elmts.length;
         t.stopCallback = params.stopCallback || null;
         t.firstFrame = 1;
@@ -42,8 +39,7 @@
         //"protected" method
         _render : function() {
             var i = this.elmtsLength, t = this;
-            //http://jsperf.com/jquery-backgroundposition-vs-native-backgroundposition
-            while(i--) this.elmts[i].style.backgroundPosition = this._tmpFrames[this._idx];
+            while(i--) { this.elmts[i].style.backgroundPosition = this._tmpFrames[this._idx]; }
             if(t.playing) {
                 if(t._idx >= t.lastFrame -1) {
                     if(!t.loop) {
@@ -59,13 +55,15 @@
         _enterFrame : function() {
             var t = this;
             t._render.call(t);
-            t.playing && (t._timer = setTimeout(function() {
-                                        t._enterFrame.call(t);
-                                    }, 1000/t.framerate));
+            if(t.playing){ 
+                t._timer = setTimeout(function() {
+                        t._enterFrame.call(t);
+                }, 1000/t.framerate);
+            }
         },
         _calculateFrames : function() {
             this._tmpFrames = [];
-            if(this._way == 1) {
+            if(this._way === 1) {
                 this._tmpFrames = this.frames;
             } else { 
                 var i = this.frames.length;
@@ -83,7 +81,7 @@
             var frames = this.frames,
             i = frames.length;
             this.frames = [];
-            while(i--) this.frames[i] = '-'+frames[i].x+'px -'+frames[i].y+'px';
+            while(i--) {this.frames[i] = '-'+frames[i].x+'px -'+frames[i].y+'px'; }
         },
         //public method
         
@@ -103,16 +101,16 @@
                 return;
             }
             //some error reporting
-            if(!frames && !direction) {throw "JSMovieclip need at least frames array or a direction ";return;}
-            if(direction == 'v' && !height) {throw "If you want to use a vertical sprite, JSMoviclip need a height";return;}
-            if(direction == 'h' && !width) {throw "If you want to use a horizontal sprite, JSMoviclip need a width";return;}
-            if(!nbframe) {throw "If you want to use a horizontal of vertical sprite, JSMoviclip need a number of frame";return;}
+            if(!frames && !direction) {throw "JSMovieclip need at least frames array or a direction ";  }
+            if(direction === 'v' && !height) {throw "If you want to use a vertical sprite, JSMoviclip need a height";  }
+            if(direction === 'h' && !width) {throw "If you want to use a horizontal sprite, JSMoviclip need a width";  }
+            if(!nbframe) {throw "If you want to use a horizontal of vertical sprite, JSMoviclip need a number of frame";  }
             
             var i = 0;
             for(;i<nbframe;i++) {
                 this.frames.push({
-                    x : (direction == 'h' ? i * width : 0),
-                    y : (direction == 'v' ? i * height : 0)
+                    x : (direction === 'h' ? i * width : 0),
+                    y : (direction === 'v' ? i * height : 0)
                 });
             }
             i=null;
@@ -132,8 +130,11 @@
          * @return current JSMovieclip object
          */
         changeWay : function(way, keepFrame) {
-          if(way == this._way) return this;
-          !!keepFrame === true && (this._idx = this._framesNumber - this._idx);
+          if(way === this._way) {return this;}
+          keepFrame = !!keepFrame;
+          if(keepFrame === true)  {
+              this._idx = this._framesNumber - this._idx;
+          }
           this._way = way;
           this._calculateFrames();
           return this;
@@ -147,7 +148,7 @@
             if(firstFrame >= lastFrame) {firstFrame = lastFrame;throw 'Firstframe and lastframe are equals or inverted';}
             this.firstFrame = Math.max(firstFrame, 1);
             this.lastFrame = Math.min(lastFrame, this._framesNumber);
-            (this._idx < this.firstFrame - 1 || this._idx > this.lastFrame -1) && (this._idx = this.firstFrame -1);
+            if(this._idx < this.firstFrame - 1 || this._idx > this.lastFrame -1)  {this._idx = this.firstFrame -1;}
             return this;
         },
         currentFrame : function() {
@@ -165,8 +166,8 @@
             return !this.playing ? this.play(loop) : this.stop();
         },
         play : function(loop) {
-            if(this.playing) return;
-            this._idx === this.lastFrame-1 && (this._idx = this.firstFrame-1)
+            if(this.playing) {return this;}
+            if(this._idx === this.lastFrame-1) { this._idx =  this.firstFrame-1; } 
             this.playing = true;
             this.loop = !!loop;
             this._enterFrame();
@@ -174,8 +175,11 @@
         },
         stop : function() {
             this.playing = false;
-            this._timer && (clearTimeout(this._timer), this._timer = null);
-            this.stopCallback && this.stopCallback();
+            if(this._timer)  {
+                clearTimeout(this._timer);
+                this._timer = null;
+            }
+            if(this.stopCallback) { this.stopCallback();}
             return this;
         },
         gotoAndPlay : function(frame, loop) {
@@ -187,13 +191,12 @@
             this.loop = false;
             this.playing = false;
             this._enterFrame();
-            this.stopCallback && this.stopCallback();
             return this;
         }
     };
 
    /**
-    * jQuert plugin wrapper
+    * jQuery plugin wrapper
     */
    $.fn.JSMovieclip= function(options) {
       return this.length ? this.data('JSMovieclip', new JSMovieclip(this, options)) : null;

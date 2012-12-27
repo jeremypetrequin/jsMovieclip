@@ -1,11 +1,10 @@
-/**
- * JSMovieclip,
- * create, animate, & control sprite sheet animation as AS3 movieclip
- * work on all browser (from IE5.5), all smartphones & tablets devices
- * @author Jeremy Petrequin
- * @website https://github.com/jeremypetrequin/jsMovieclip
+/*!
+ * JSMovieclip V1.0
+ * https://github.com/jeremypetrequin/jsMovieclip
+ * Copyright 2013 Jeremy Petrequin
+ * Released under the MIT license
+ * https://github.com/jeremypetrequin/jsMovieclip/blob/master/MIT-license.txt
  */
-   
 (function() {
     "use strict";
     function JSMovieclip(elmts, params) {

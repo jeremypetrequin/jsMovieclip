@@ -14,13 +14,15 @@ Instance :
 
     var movieclip = new JSMovieclip(document.getElementById('div-id'), params);
 
+In first param, you can passe : a dom element, an array of a dom elements, a NodeList, a jQuery object...
+
 You can pass some options in params: 
 
     {
         frames : [],
         direction : 'h' || 'v',
         frame_number : 0,
-        stopCallbach : fn,
+        stopCallback : fn,
         framerate : 25,
         width : 0,
         height : 0

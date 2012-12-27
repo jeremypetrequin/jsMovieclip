@@ -159,4 +159,29 @@ mc.stop();
 //....
 ````    
 
+Samples & Usefull links
+------------
+###Sample###
+<ul>
+<li> Basic example : http://jsmovieclip.jeremypetrequin.fr/samples/basic/ </li>
+<li> Multiple : http://jsmovieclip.jeremypetrequin.fr/samples/multiple/ </li>
+<li> Control the animation : http://jsmovieclip.jeremypetrequin.fr/samples/controls/</li>
+<li> Squirrel : http://jsmovieclip.jeremypetrequin.fr/samples/squirrel/</li>
+</ul>
 
+###Experiment###
+<ul>
+<li>
+Little game experiment : http://jsmovieclip.jeremypetrequin.fr/samples/game/
+</li></ul>
+
+###Tools###
+<ul>
+<li>
+Convert TexturePacker JSON Array export to Javascript Array : http://jsmovieclip.jeremypetrequin.fr/tools/convert/
+</li></ul>
+###Articles###
+<ul>
+<li>
+Workflow Flash > Texture Packer > JSMovieclip : https://gist.github.com/14a77d4652c096a1fac7
+</li></ul>

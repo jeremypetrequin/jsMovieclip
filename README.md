@@ -1,18 +1,18 @@
 JSMovieClip
 =========
 
-JS movieclip is a small javascript library to quickly and easily create, integrate, and control animations in a HTML page.
+JS movieclip is a small javascript library to quickly and easily create, integrate, and control animations in an HTML page.
 
-It is compatible with all browsers, from Internet Explorer 6, as well as smartphone (iOS, Android..). 
+It is compatible with all browsers, from Internet Explorer 6 to latest smartphone (iOS, Android..). 
 
-JS MovieClip uses "sprite", that is it say a large image containing all the frames of its animation. Then, It will allow to play and control the animation with ````stop()````, ````play()````, ````gotoAndPlay()```` ... like any Flashers does.
+JS MovieClip uses "sprite", that is to say a large image containing all the frames of to animation. Then, It will allow to play and control the animation with ````stop()````, ````play()````, ````gotoAndPlay()```` ... like any Flashers does.
 
 V1 stable
 ----------
 ###Creation###
 
 First, you need a sprite, a big image containing each frame of your animation.
-For it, you have 3 options : 
+You have 3 options : 
 <ul>
     <li>Horizontal sprite http://jsmovieclip.jeremypetrequin.fr/samples/basic/poulpe.png</li>
     <li>Vertical sprite http://jsmovieclip.jeremypetrequin.fr/samples/basic/poulpe_1.png</li>
@@ -24,12 +24,12 @@ The only requirement is that each frame need to have the same size!
 To simply create it : in Flash or After Effects, export your animation in a PNG sequences, and join it in a sprite with photoshop, GIMP, TexturePacker...
 
 
-Then, you need a DOM element, div or what you want : 
+Then, you need a DOM element, div or whatever you want : 
 ````HTML
 <div id="my-element"></div>
 ````
 
-After, you need to apply it the width and the height of a frame and the sprite as background :
+After, you need to apply to it the width and the height of a frame and the sprite as background :
 ````CSS
 #my-element {
     width : 200px;
@@ -43,9 +43,9 @@ And now, instanciate a new JSMovieclip object :
 var movieclip = new JSMovieclip(document.getElementById('my-element'), params);
 ````
 
-First parameter may be a DOM element, an array of DOM elements, a jQuery (or Zepto..) object, a NodeList...
+First parameter can be a DOM element, an array of DOM elements, a jQuery (or Zepto..) object, a NodeList...
 
-Second parameter is options, it can be : 
+Second parameters are options, they can be : 
 ````javascript
 {
     framerate : 25,
@@ -63,14 +63,14 @@ So :
     <li>In stopCallback you can pass a function it'll call each time the movieclip stops</li>
 </ul>
 
-For the sprite, you have several option, so, 
+For the sprite, you have several options, so, 
 <ul>
-<li>if you have a horizontal sprite, you can simply specifie direction : 'h' (horinzontal), the frame_number and the width of a frame
+<li>if you have an horizontal sprite, you can simply specifie the direction : 'h' (horinzontal), the frame_number and the width of a frame
 </li>
 <li>
 For a vertical sprite, set direction to 'v', the frame_number, and the height of a frame
 </li>
-<li>If you have a custom sprite, just set the frames array with each frame : [{x:0, y:0}, {x:200, y:0}, {x:400, 0}, {x:0, y:200}, {x:200, y:200}, {x:400, 200} ,....] (you can also use this parameter for a vertical of a horizontal sprite)</li>
+<li>If you have a custom sprite, just set the frames array with each frame : [{x:0, y:0}, {x:200, y:0}, {x:400, 0}, {x:0, y:200}, {x:200, y:200}, {x:400, 200} ,....] (you can also use this parameter for a vertical or an horizontal sprite)</li>
 </ul>
 
 ###API###
@@ -107,7 +107,7 @@ all animation are now between frameStart and frameEnd animation
 mc.loopBetween(1, 10).play(true); //play animation between first frame and 10's
 ````
 
-If you call ````mc.loopBetween();```` you can call clearLoopBetween to reset first et lastFrame to the default
+If you call ````mc.loopBetween();```` you can call clearLoopBetween to reset first and lastFrame to the default
 ````javascript
 mc.clearLoopBetween();
 ````

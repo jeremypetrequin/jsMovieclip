@@ -6,7 +6,7 @@
  * https://github.com/jeremypetrequin/jsMovieclip/blob/master/MIT-license.txt
  */
 (function() {
-    "use strict";
+   "use strict";
     function JSMovieclip(elmts, params) {
         if(!elmts) {return this;}
         var t = this,
@@ -71,7 +71,7 @@
                 }
             }
             this._framesNumber = this.frames.length;
-            this.clearLoopBetween();
+            return this.clearLoopBetween();
         },
         /**
          * concat each frame as a string, to better performance
@@ -81,6 +81,7 @@
             i = frames.length;
             this.frames = [];
             while(i--) {this.frames[i] = '-'+frames[i].x+'px -'+frames[i].y+'px'; }
+            return this;
         },
         //public method
         
@@ -93,11 +94,8 @@
          */
         updateFrames : function(frames, direction, width, height, nbframe) {
             if(frames) {
-                //gerer les unités
                 this.frames = frames;
-                this._cacheFrames();
-                this._calculateFrames();
-                return;
+                return this._cacheFrames()._calculateFrames();
             }
             //some error reporting
             if(!frames && !direction) {throw "JSMovieclip need at least frames array or a direction ";  }
@@ -113,9 +111,7 @@
                 });
             }
             i=null;
-            this._cacheFrames();
-            this._calculateFrames();
-            return this;
+            return this._cacheFrames()._calculateFrames();
         },
         /**
          * @return way (int) of playing : 1 normal way, -1 inverted way
@@ -135,8 +131,7 @@
               this._idx = this._framesNumber - this._idx;
           }
           this._way = way;
-          this._calculateFrames();
-          return this;
+          return this._calculateFrames();
         },
         clearLoopBetween : function() {
             this.firstFrame = 1;
@@ -201,5 +196,3 @@
       return this.length ? this.data('JSMovieclip', new JSMovieclip(this, options)) : null;
   };
 })();
-
-

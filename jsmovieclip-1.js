@@ -91,6 +91,7 @@
          * @param width float (in case of a horizontal sprite) (optional)
          * @param height float height of a frame (in case of a vertical sprite)(optional)
          * @param nbframe float number of frames (optional)
+         * @return this
          */
         updateFrames : function(frames, direction, width, height, nbframe) {
             if(frames) {
@@ -122,7 +123,6 @@
         /**
          * change the way of playing
          * @param way int : 1 normal way, -1 inverted way
-         * @return current JSMovieclip object
          */
         changeWay : function(way, keepFrame) {
           if(way === this._way) {return this;}

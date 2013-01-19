@@ -3,7 +3,7 @@
     "title" : "JS Movieclip",
     "description" : "JS movieclip is a small javascript library to quickly and easily create, integrate, and control animations in an HTML page using sprite",
     "keywords": [
-        "animation"
+        "animation", "sprite", "image", "flash"
     ],
     "version" : "1.0",
     "author" : {

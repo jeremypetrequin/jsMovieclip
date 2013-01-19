@@ -1,0 +1,25 @@
+{
+    "name" : "jsmovieclip",
+    "title" : "JS Movieclip",
+    "description" : "JS movieclip is a small javascript library to quickly and easily create, integrate, and control animations in an HTML page using sprite",
+    "keywords": [
+        "animation"
+    ],
+    "version" : "1.0",
+    "author" : {
+        "name": "Petrequin Jeremy",
+        "url": "http://jeremypetrequin.fr",
+        "email" : "jeremy.petrequin@gmail.com"
+    },
+    "homepage" : "http://jsmovieclip.jeremypetrequin.fr/",
+    "demo" : "https://github.com/jeremypetrequin/jsMovieclip#samples--usefull-links",
+    "download" : "https://github.com/jeremypetrequin/jsMovieclip/archive/master.zip",
+    "bugs" : "https://github.com/jeremypetrequin/jsMovieclip/issues",
+    "licenses" : [{
+        "type": "MIT",
+        "url": "https://github.com/jeremypetrequin/jsMovieclip/blob/master/MIT-license.txt"
+    }],
+    "dependencies" : {
+        "jquery": ">=1.4"
+    }
+}

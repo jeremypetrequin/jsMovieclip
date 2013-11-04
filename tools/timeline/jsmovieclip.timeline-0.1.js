@@ -1,7 +1,9 @@
 /**
-this is a WIP to use JSMovieclip with promise and can doing things like : 
-myMC.play().wait(500).then(...)
+this is a WIP to use JSMovieclip with promise and doing things like : 
+myMC.play().wait(500).changeWay().gotoAndPlay(1, false).launch(repeatNumber, fn());
 
+
+@todo : pause and resume the queue
 */
 
 (function(w) {
@@ -9,13 +11,25 @@ myMC.play().wait(500).then(...)
         JSMovieclip.apply(this, arguments);
             
         this.queue = [];
-        for(methodName in JSMovieclip.prototype) {
+        this.queueIndex = 0;
+        this.lockQueue = false;
+        this.callbackEndQueue = null;
+        this.repeatNumber = 1;
+        this._cptRepeat = 0;
+        this.debug = false;
+        
+        var scope = this;
+        for(var methodName in JSMovieclip.prototype) {
             //is a method and not "private" ?
             if(typeof this[methodName] === 'function' && methodName.indexOf('_') !== 0) {
                 (function(methodName) { //dirty, i'm looking for a proper solution if u have any idea?
                     JST.prototype[methodName] = function() {
-                        this.queue.push([methodName, arguments])
-                        return JSMovieclip.prototype[methodName].apply(this, arguments);
+                        if(!scope.lockQueue) {
+                          scope.queue.push([methodName, arguments])
+                          return scope;  
+                        } else {
+                           return JSMovieclip.prototype[methodName].apply(this, arguments);    
+                        }
                     }
                 })(methodName);
             }
@@ -24,58 +38,69 @@ myMC.play().wait(500).then(...)
     
     JST.prototype  = new JSMovieclip;
     
-    JST.prototype.then = function(callback) {
-        var lastMethodName = this._getLast()[0];
+    JST.prototype.wait = function(delay) { 
+        this.queue.push(['wait', arguments]);
+        return this;
+    }
+    
+    JST.prototype.launch = function(repeatNumber, cb) {
+        this.callbackEndQueue = cb || null;
+        this.lockQueue = true;
+        this.queueIndex = -1;
+        this.repeatNumber = typeof repeatNumber === 'number' || typeof repeatNumber === 'string' ? parseInt(repeatNumber) : (repeatNumber === true ? -1 : 1);
+        this._walk();
+        return this;                
+    }
+    JST.prototype.clear = function() {
+        this.queue = [];
+        this.lockQueue = false;
+        this.queueIndex = -1;
+        this.repeatNumber = 1;
+        this._cptRepeat = 0;
+    }
+    JST.prototype._walk = function() {
         var scope = this;
-        switch(lastMethodName) {
+        this.queueIndex++;       
+        if(this.queueIndex >= this.queue.length) {
+            if(this.repeatNumber !== -1) {
+                this._cptRepeat++;
+                if(this._cptRepeat > this.repeatNumber) {
+                    this.callbackEndQueue && this.callbackEndQueue();
+                    return;
+                }
+            }
+           this.queueIndex = 0; 
+        }
+
+        var method = this.queue[this.queueIndex],
+        methodName = method[0];
+        if(this.debug && w.console) console.log(methodName, method[1]);
+        switch(methodName) {
             
             case 'wait' : 
                 setTimeout(function() {
-                    scope._call(callback);
-                }, this._getLast()[1][0]); 
+                    scope._walk();
+                }, method[1][0]); 
             break;
-            case 'then' : 
-            
+            case 'loopBetween':
+            case 'updateFrames' :
+            case 'changeWay' : 
+                JSMovieclip.prototype[methodName].apply(scope, method[1]);
+                scope._walk();
             break;
             default :
                 var tmpStopCB = this.stopCallback || null;
                 this.stopCallback =function() {
                     this.stopCallback = tmpStopCB;
                     scope._call(tmpStopCB);
-                    scope._call(callback);
+                    scope._walk();
                 }
-            
+                JSMovieclip.prototype[methodName].apply(scope, method[1]);
             break;
         }
-        this.queue.push(['then', arguments]);
-        
-        return this;
-    };
-    
-    JST.prototype.wait = function(delay) {/*
-        if(this._getLast()[0] !== 'then') {
-            this.queue.push(['wait', arguments]);
-            this.then(    
-        } else {
-            this.queue.push(['wait', arguments]);
-        }
-*/        
-        this.queue.push(['wait', arguments]);
-        return this;
     }
-    
-    JST.prototype.loop = function() {
-        
-        return this;
-    }
-    JST.launch = function(repeat) {
-         
-        return this;                
-    }
-    
     
     JST.prototype._call = function(cb) {
-    console.log(this);
         cb && cb.call(this);
     }
     JST.prototype._getLast = function() {

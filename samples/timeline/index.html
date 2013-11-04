@@ -36,27 +36,27 @@
             <script src="../../jsmovieclip-1.js"></script>
             <script src="../../tools/timeline/jsmovieclip.timeline-0.1.js"></script>
             <script>
-            //just test for now
+                    //just test for now
                     var octo = document.getElementById('octo'),
                     movieclip = new JSMovieclipTimeline(octo, {
                         width : 103, 
                         direction : 'h', 
                         frames_number : 17, 
                         framerate : 24
-                    }).loopBetween(1, 12).play(false).then(function() {
-                        this.wait(500).then(function() {
-                        
-                            this.gotoAndPlay(1).then(function() {
-                                  this.wait(2000).then(function() {
-                                      this.changeWay().clearLoopBetween().play(true).wait(2000).then(function() {
-                                          this.stop().wait(500).then(function() {
-                                              this.changeWay().gotoAndPlay(1, true);
-                                          })
-                                      })    
-                              })
-                            })
-                        });
+                    })
+                    .loopBetween(1, 12)
+                    .play(false)
+                    .wait(1000)
+                    .gotoAndPlay(1, false)
+                    .wait(1000)
+                    .changeWay()
+                    .gotoAndPlay(5, false)
+                    .changeWay()
+                    .gotoAndPlay(1, false)
+                    .launch(2, function() {
+                        console.log('END QUEUE');
                     });
+                    
                     
 
                     

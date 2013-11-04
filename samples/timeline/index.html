@@ -1,0 +1,68 @@
+<!-- WIP -->
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta content="Octopus, basic sample of JS movieclip" name="description" />
+        <title>Octopus, basic sample of JS movieclip</title>
+        <style>
+            body {
+                background: black;
+                text-align: center;
+                color: white;
+                font-family: sans-serif;
+            }
+            
+            .octo {
+                cursor: pointer;
+                margin: 20px auto;
+            }
+            
+            #octo {
+                background: url(poulpe.png) no-repeat;   
+                width: 98px;
+                height: 100px;
+            }
+
+            
+            p {text-align: center}
+        </style>
+    </head>
+        
+    <body>        
+            <div id="octo" class="octo"></div>
+
+            
+            <script src="../../jsmovieclip-1.js"></script>
+            <script src="../../tools/timeline/jsmovieclip.timeline-0.1.js"></script>
+            <script>
+            //just test for now
+                    var octo = document.getElementById('octo'),
+                    movieclip = new JSMovieclipTimeline(octo, {
+                        width : 103, 
+                        direction : 'h', 
+                        frames_number : 17, 
+                        framerate : 24
+                    }).loopBetween(1, 12).play(false).then(function() {
+                        this.wait(500).then(function() {
+                        
+                            this.gotoAndPlay(1).then(function() {
+                                  this.wait(2000).then(function() {
+                                      this.changeWay().clearLoopBetween().play(true).wait(2000).then(function() {
+                                          this.stop().wait(500).then(function() {
+                                              this.changeWay().gotoAndPlay(1, true);
+                                          })
+                                      })    
+                              })
+                            })
+                        });
+                    });
+                    
+
+                    
+                    
+                    
+                     
+            </script>
+    </body>
+</html>

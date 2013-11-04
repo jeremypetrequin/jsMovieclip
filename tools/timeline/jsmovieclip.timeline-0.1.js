@@ -1,5 +1,5 @@
 /**
-this is a WIP to use JSMovieclip has promise and can doing things like : 
+this is a WIP to use JSMovieclip with promise and can doing things like : 
 myMC.play().wait(500).then(...)
 
 */

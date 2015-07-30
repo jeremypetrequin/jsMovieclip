@@ -70,7 +70,7 @@ For the sprite, you have several options, so,
 <li>
 For a vertical sprite, set direction to 'v', the frames_number, and the height of a frame
 </li>
-<li>If you have a custom sprite, just set the frames array with each frame : [{x:0, y:0}, {x:200, y:0}, {x:400, 0}, {x:0, y:200}, {x:200, y:200}, {x:400, 200} ,....] (you can also use this parameter for a vertical or a horizontal sprite)</li>
+<li>If you have a custom sprite, just set the frames array with each frame : [{x:0, y:0}, {x:200, y:0}, {x:400, 0}, {x:0, y:200}, {x:200, y:200}, {x:400, y:200} ,....] (you can also use this parameter for a vertical or a horizontal sprite)</li>
 </ul>
 
 ###API###

@@ -1,0 +1,21 @@
+{
+  "name": "jsmovieclip",
+  "version": "v1.0.0",
+  "homepage": "https://github.com/jeremypetrequin/jsMovieclip/",
+  "authors": [
+    "keitakun",
+    "grifotv"
+  ],
+  "description": "JS movieclip is a small javascript library to quickly and easily create, integrate, and control animations in an HTML page.",
+  "main": "jsmovieclip-1.js",
+  "keywords": [
+    "spritesheet",
+    "animation"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "sample",
+    "tools"
+  ]
+}
